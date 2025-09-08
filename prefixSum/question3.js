@@ -34,6 +34,11 @@ const countEvenNumbersInRangeBrute = (array, queries) => {
   return result;
 };
 
+// Optimize
+
+// T.C: O(Q);
+// S.C: O(N)
+
 const countEvenNumbersInRangeOptimize = (array, queries) => {
   const result = [];
 
