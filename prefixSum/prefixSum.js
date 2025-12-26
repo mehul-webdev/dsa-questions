@@ -14,5 +14,3 @@ function createPrefixArray(arr) {
 }
 
 export default createPrefixArray;
-
-// module.exports = createPrefixArray;
