@@ -16,17 +16,26 @@ Subarrays are:
 
 */
 
+/*
 
+To get the no of subarrays in array where n is the length of array: 
 
-// Function to print the subarray:
+Formula: n(n+1)/2
 
-function printSubarrays(arr) {
-
-}
-
-
-
+*/
 function handleGetNoOfSubaaray(array) {
-    const length = array.length;
-    return (length * (length + 1) / 2);
+  const length = array.length;
+  return (length * (length + 1)) / 2;
 }
+
+const noOfOfSubarrays = handleGetNoOfSubaaray([1, 2, 3, 4]);
+console.log(noOfOfSubarrays);
+
+/*
+
+Question1: Print all the subarrays
+Question2: Sum of subarray
+Question3: Sum of all sub array sum
+Question4: contribution element in subarray formula
+
+*/

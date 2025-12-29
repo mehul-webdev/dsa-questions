@@ -1,23 +1,31 @@
 /*
 
-Question1: Print all subarrays
+Print all the subarrays
+
+let arr = [8,2,9,10];
 
 */
 
-// Time complexity : O(n^3)
-// Space complexity: O(1)
+/*
+Brute force approach
+Time complexity: O(N ^ 3)
+Space complexity: O(1)
+*/
 
-function printSubarray(array) {
-  for (let start = 0; start < array.length; start++) {
-    for (let end = start; end < array.length; end++) {
-      let sub = [];
-      for (let k = start; k <= end; k++) {
-        sub.push(array[k]);
-        // console.log(array[k]);
+function handlePrintSubarray(arr) {
+  const arrayLength = arr.length;
+  for (let start = 0; start < arrayLength; start++) {
+    for (let end = start; end < arrayLength; end++) {
+      let startIndex = start;
+      let endIndex = end;
+
+      for (let i = startIndex; i <= endIndex; i++) {
+        process.stdout.write(arr[i] + " ");
       }
-      console.log(sub);
+      process.stdout.write("\n");
     }
+    process.stdout.write("\n");
   }
 }
 
-const result = printSubarray([1, 2, 3, 4]);
+handlePrintSubarray([-1, 3, 2, 3]);

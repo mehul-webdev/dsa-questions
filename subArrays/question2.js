@@ -1,86 +1,92 @@
 /*
 
-Question2: 
-Print all subarray sum
-
-let arr = [8,2,9,10];
-[0,0] = 8;
-[0,1] = 10;
-[0,2] = 19;
- and so on
+Question: Sum of the subarrays
 
 
+let arr = [-1,3,2,3]
+
+example: [-1] : -1, [-1,3] : 2 ... and so on
 
 
 */
 
-// Time complexity
+/*
+Time complexity: O(n ^ 2)
+Space complexity: O(1)
 
-function handleGetPreFixSum(array) {
-  if (array.length === 0) {
-    return [];
+*/
+
+function printSumofSubarray(arr) {
+  const arrayLength = arr.length;
+  for (let start = 0; start < arrayLength; start++) {
+    let sum = 0;
+
+    for (let end = start; end < arrayLength; end++) {
+      sum = sum + arr[end];
+      console.log(`Here start is ${start} and end is ${end} is : ${sum}`);
+    }
   }
-  let prevSum = array[0];
-  let prefixSum = [array[0]];
-
-  for (let i = 1; i < array.length; i++) {
-    prefixSum[i] = prevSum + array[i];
-    prevSum = prefixSum[i];
-  }
-
-  return prefixSum;
 }
 
-// Time complexity: O(N^2)
-//  Space complexity: O(N)
+printSumofSubarray([-1, 3, 2, 3]);
 
-function getSubArraySumUsingPrefix(array) {
-  const getPreFixSum = handleGetPreFixSum(array); // Time complexity: O(N); Space complexity: O(N)
+// Solving this question using prefix sum
 
-  for (let start = 0; start < array.length; start++) {
-    for (let end = start; end < array.length; end++) {
+// Time complexity: O(N ^ 2)
+// Space complexity: O(N)
+
+function handleGetPrefixSum(arr) {
+  let prefixArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (i !== 0) {
+      prefixArray[i] = prefixArray[i - 1] + arr[i];
+    } else {
+      prefixArray[i] = arr[i];
+    }
+  }
+
+  return prefixArray;
+}
+
+function printSumofSubarrayUsingPrefixSum(arr) {
+  let prefixSum = handleGetPrefixSum(arr);
+
+  const arrayLength = arr.length;
+  for (let start = 0; start < arrayLength; start++) {
+    for (let end = start; end < arrayLength; end++) {
+      let sum = 0;
+
       if (start === 0) {
-        console.log("here sum is", getPreFixSum[end]);
+        sum = sum + prefixSum[end];
       } else {
-        console.log("here sum is", getPreFixSum[end] - getPreFixSum[start - 1]);
+        sum = sum + prefixSum[end] - prefixSum[start - 1];
       }
+
+      console.log("here sum is", sum);
     }
   }
 }
 
-// Time complexity: O(N ^ 1)
-// Space complexity: O(1)
-function printSubarrayUsingCarryForward(array) {
-  for (let start = 0; start < array.length; start++) {
+printSumofSubarrayUsingPrefixSum([-1, 3, 2, 3]);
+
+// Print maxium subarray:
+
+function handleGetMaxSubarraySum(arr) {
+  let max = arr[0];
+
+  for (let start = 0; start < arr.length; start++) {
     let sum = 0;
 
-    for (let end = start; end < array.length; end++) {
-      sum = sum + array[end];
-      console.log("the sum is", sum);
+    for (let end = start; end < arr.length; end++) {
+      sum = sum + arr[end];
     }
-  }
-}
 
-// Time complexity: O(N^2)
-// Space complexity: O(1)
-
-function getMaximumSumOfSubArray(array) {
-  let max = array[0];
-  let maxSum = 0;
-
-  for (let start = 0; start < array.length; start++) {
-    let sum = 0;
-
-    for (let end = start; end < array.length; end++) {
-      sum = sum + array[end];
-      max = Math.max(max, sum);
-      maxSum = maxSum + sum;
-    }
+    max = Math.max(max, sum);
   }
 
-  console.log("the max is", [max, maxSum]);
+  return max;
 }
 
-const result = getSubArraySumUsingPrefix([8, 2, 9, 10]);
-const result2 = printSubarrayUsingCarryForward([8, 2, 9, 10]);
-const result3 = getMaximumSumOfSubArray([8, 2, 9, 10]);
+const maxSum = handleGetMaxSubarraySum([15, 3, 2, 3, 1]);
+console.log("the max sum is", maxSum);
