@@ -73,6 +73,7 @@ printSumofSubarrayUsingPrefixSum([-1, 3, 2, 3]);
 // Print maxium subarray:
 
 function handleGetMaxSubarraySum(arr) {
+  if (arr.length === 0) return 0;
   let max = arr[0];
 
   for (let start = 0; start < arr.length; start++) {
@@ -80,13 +81,12 @@ function handleGetMaxSubarraySum(arr) {
 
     for (let end = start; end < arr.length; end++) {
       sum = sum + arr[end];
+      max = Math.max(sum, max);
     }
-
-    max = Math.max(max, sum);
   }
 
   return max;
 }
 
-const maxSum = handleGetMaxSubarraySum([15, 3, 2, 3, 1]);
+const maxSum = handleGetMaxSubarraySum([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 console.log("the max sum is", maxSum);

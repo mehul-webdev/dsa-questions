@@ -14,6 +14,7 @@ Space complexity: O(1)
 
 function handlePrintSubarray(arr) {
   const arrayLength = arr.length;
+
   for (let start = 0; start < arrayLength; start++) {
     for (let end = start; end < arrayLength; end++) {
       let startIndex = start;
